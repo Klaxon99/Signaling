@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OpenTrigger : MonoBehaviour
+public class DoorOpenTrigger : MonoBehaviour
 {
     [SerializeField] private Door _door;
 

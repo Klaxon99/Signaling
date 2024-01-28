@@ -13,12 +13,18 @@ public class Signaling : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        RestartCoroutine(_minVolume, _maxVolume);
+        if (HasRight(other) == false)
+        {
+            RestartCoroutine(_minVolume, _maxVolume);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        RestartCoroutine(_currentVolume, _minVolume);
+        if (HasRight(other) == false)
+        {
+            RestartCoroutine(_currentVolume, _minVolume);
+        }
     }
 
     private void RestartCoroutine(float startVolume, float endVolume)
@@ -29,6 +35,11 @@ public class Signaling : MonoBehaviour
         }
 
         _coroutine = StartCoroutine(PlaySignalingAudio(startVolume, endVolume));
+    }
+
+    private bool HasRight(Collider visitor)
+    {
+        return visitor.GetComponent<HouseOwner>() != null;
     }
 
     private IEnumerator PlaySignalingAudio(float startVolume, float endVolume)
